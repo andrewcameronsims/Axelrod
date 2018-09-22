@@ -78,7 +78,7 @@ class Agent():
             if i == self.culture[model.agents[target].culture.index(i)]:
                 similarity += 1
                 
-        interaction_probability = similarity / FEATURES * 100
+        interaction_probability = similarity / FEATURES
         
         if rd.uniform(0, 1) < interaction_probability:
             shared = rd.randint(0, FEATURES - 1)
