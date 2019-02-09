@@ -69,13 +69,17 @@ class Agent():
         self.culture = [rd.choice(TRAITS) for i in range(FEATURES)]
 
     def culture_share(self, target, model):
+
+        # Determines the similarity between a cell and its neighbors
         similarity = 0
         for i in model.agents[target].culture:
             if i == self.culture[model.agents[target].culture.index(i)]:
                 similarity += 1
 
+        # Derives the probability of interaction from similarity
         interaction_probability = similarity / FEATURES
 
+        # Agent has this probability of propagating a cultural feature
         if rd.uniform(0, 1) < interaction_probability:
             shared = rd.randint(0, FEATURES - 1)
             model.agents[target].culture[shared] = self.culture[shared]
@@ -85,6 +89,7 @@ class Axelrod():
 
     def __init__(self):
         self.agents = [Agent() for i in range(SIZE**2)]
+        self.recorder = Recorder()
 
     def tick(self):
         "Runs a single cycle of the simulation"
@@ -92,10 +97,12 @@ class Axelrod():
             active = rd.choice(self.agents)
             passive = find_index(rd.choice(find_neighbors(find_location(self.agents.index(active), SIZE))), SIZE)
             active.culture_share(passive, self)
+        # If the cell selected is outside the model, call the function again
         except IndexError:
             self.tick()
 
     def show_state(self):
+        "Prints representation of current state in text format"
         for n in range(0, SIZE):
             row = [self.agents[i].culture for i in range(n * SIZE, n * (SIZE) + SIZE)]
             for agent in row:
@@ -106,6 +113,7 @@ class Axelrod():
             print("-" * (SIZE*FEATURES*2+SIZE))
 
     def run_sim(self):
+        "Runs a pre-specified number of cycles of the simulation"
         print("Initial state of the model:")
         print()
         self.show_state()
@@ -117,16 +125,26 @@ class Axelrod():
         self.show_state()
 
 class Recorder():
-    "Records states of a model which include it by composition"
+    "Record and playback states of a model"
 
     def __init__(self):
         states = []
+        model = self.owner
 
     def record_state(self):
-        pass
+        self.states.append(model.agents)
 
-    def get_state(self):
-        pass
+    def play_state(self, tick=-1):
+        return self.states[tick]
 
     def playback(self):
+        for i in self.states:
+            self.play_state(i)
+
+class Visualiser():
+    "Produces a visualisation of a state list given by a Recorder"
+
+    def __init__(self):
         pass
+
+    #TODO: choose a library for the graphics
