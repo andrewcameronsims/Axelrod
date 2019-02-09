@@ -117,7 +117,16 @@ class Axelrod():
         self.show_state()
 
 class Recorder():
-    "Record states of a model which includes it"
+    "Records states of a model which include it by composition"
 
     def __init__(self):
-        
+        states = []
+
+    def record_state(self):
+        pass
+
+    def get_state(self):
+        pass
+
+    def playback(self):
+        pass
