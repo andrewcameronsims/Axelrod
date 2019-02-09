@@ -6,7 +6,7 @@
 
 {% block navbar %}
   <nav class="navbar navbar-default">
-    Axelrod: An interactive simulation of social polarisation
+    <h2>Axelrod: An interactive simulation of social polarisation</h2>
     <br>
     <a href="/about">About</a> |
     <a href="/sim">Simulation</a>
@@ -23,7 +23,7 @@
         {% endif %}
         {% endwith %}
 
-        {# application content needs to be provided in the app_content block #}
+        {# Does this work? #}
         {% block app_content %}{% endblock %}
     </div>
 {% endblock %}

@@ -1,15 +1,36 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-<h2>Background</h2>
+
+<h3>Background</h3>
 <p>It is often said that Western countries are becoming increasingly polarised
 societies, with this polarisation occuring around politically-charged
 issues like climate change and immigration.</p>
-<h2>Simulating social phenomena</h2>
-<p>One way to understand a phenomenon of interest is through simulation. To run
-a simulation involves making some good guesses about the processes that are
-central to that phenomenon in order to recreate that same phenomenon at a smaller
-scale. This can be done computationally, although it need not be.</p>
-<h2>The dissemination of culture: local convergence and global polarisation</h2>
-<p></p>
+
+<h3>Understanding social phenomena through agent-based models</h3>
+<p>One way to understand a phenomenon of interest is through modelling. To create
+a model involves making some good guesses about the processes that are
+central to the phenomenon in order to recreate it at a smaller
+scale. This can be done computationally, although it need not be. One example of
+a non-computational or "physical" model is that of the Mississipi
+Delta which was built by the U.S. Army Engineer Corps, and used in
+order to simulate and better understand flooding in that region. By carefully
+tweaking the objects representing parts of the <em>real</em> Mississipi Delta,
+engineers were able to understand how its flow would likely behave under a range
+of real-world conditions. Nowadays, however most models are computational.
+</p>
+<p>Despite their complexity, social phenomena are also apt for modelling. Most
+often this is achieved by what is called an "agent-based model" or
+<strong>ABM</strong>. Traditional or process-based models simulate a
+phenomenon through the application of rules or laws which are assumed to accurately
+describe the processes that drive change in those phenomena, usually represented
+by differential equations. </p>
+
+<h3>The dissemination of culture: local convergence and global polarisation</h3>
+<p>On this page is an implementation of an agent-based model of social
+polarisation. The model was initially proposed by the political scientist
+Robert Axelrod (1997)</p>
+<cite>AXELROD R (1997) The dissemination of culture - A model with local convergence
+and global polarization. Journal of Conflict Resolution 41(2), pp. 203-226.</cite>
+
 {% endblock %}

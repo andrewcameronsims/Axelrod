@@ -25,8 +25,9 @@ rd.seed(SEED)
 def find_location(index, SIZE):
     """
     Finds the x and y coordinates in a square grid of SIZE**2 given an index.
-    It is assumed that we are counting from left to right on a set of rows top-down, and that area is square.
-    Rows and columns start from 0 given Python indexing conventions.
+    It is assumed that we are counting from left to right on a set of rows
+    top-down, and that area is square. Rows and columns start from 0 given
+    Python indexing conventions.
 
     e.g.
         0  1  2
@@ -60,13 +61,13 @@ def find_neighbors(loc):
     NE = loc[0] + 1, loc[1] - 1
     SW = loc[0] - 1, loc[1] + 1
     SE = loc[0] + 1, loc[1] + 1
-    return [N, S, W, E, NW, NE, SW, SE]
+    return (N, S, W, E, NW, NE, SW, SE)
 
 class Agent():
-    "Agent class to populate the model"
 
     def __init__(self):
         self.culture = [rd.choice(TRAITS) for i in range(FEATURES)]
+        model = self.owner
 
     def culture_share(self, target, model):
 
@@ -84,8 +85,7 @@ class Agent():
             shared = rd.randint(0, FEATURES - 1)
             model.agents[target].culture[shared] = self.culture[shared]
 
-class Axelrod():
-    "Model class"
+class Model():
 
     def __init__(self):
         self.agents = [Agent() for i in range(SIZE**2)]
@@ -125,7 +125,7 @@ class Axelrod():
         self.show_state()
 
 class Recorder():
-    "Record and playback states of a model"
+    "Records and plays back states of a model"
 
     def __init__(self):
         states = []
