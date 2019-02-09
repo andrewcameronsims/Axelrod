@@ -1,16 +1,38 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Axelrod: Simulating social polarisation</title>
-  </head>
-  <body>
-    <div>
-      Axelrod: An interactive simulation of social polarisation
-      <a href="/about">About</a>
-      <a href="/sim">Simulation</a>
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}
+  Axelrod: Simulating social polarisation
+{% endblock %}
+
+{% block navbar %}
+  <nav class="navbar navbar-default">
+    Axelrod: An interactive simulation of social polarisation
+    <br>
+    <a href="/about">About</a> |
+    <a href="/sim">Simulation</a>
+  </nav>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-info" role="alert">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        {# application content needs to be provided in the app_content block #}
+        {% block app_content %}{% endblock %}
     </div>
-    <hr>
-    {% block content %}{% endblock %}
-  </body>
-</html>
+{% endblock %}
+
+{% block footer %}
+<footer class="page-footer">
+  <p>Created by Andrew Sims</p>
+  EMAIL
+  GITHUB
+  LINKEDIN
+</footer>
+{% endblock %}
