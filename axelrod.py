@@ -113,7 +113,7 @@ class Model():
             print("-" * (SIZE*FEATURES*2+SIZE))
 
     def run_sim(self):
-        "Runs a pre-specified number of cycles of the simulation"
+        "Runs a pre-specified number of cycles (RUNS) of the simulation"
         print("Initial state of the model:")
         print()
         self.show_state()
