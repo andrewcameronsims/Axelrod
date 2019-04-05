@@ -5,8 +5,7 @@ require_relative 'helpers'
 require_relative 'agent'
 require_relative 'model'
 
-TRAITS = [1, 2, 3, 4, 5]
+TRAITS = (0..9).to_a
 
-model = Axelrod.new(10, 100, 5, TRAITS)
-binding.pry
+model = Axelrod.new(6, 10000, 5, TRAITS)
 model.run
