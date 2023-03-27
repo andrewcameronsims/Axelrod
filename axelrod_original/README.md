@@ -13,4 +13,6 @@ to myself practice some object-oriented programming. In future I intend
 to convert it onto a small interactive webpage where the user can themselves
 run the simulation in the browser.
 
+test
+
 AXELROD R (1997) The dissemination of culture - A model with local convergence and global polarization. *Journal of Conflict Resolution* 41(2), pp. 203-226.
