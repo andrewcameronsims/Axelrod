@@ -5,12 +5,13 @@ AXELROD R (1997) The dissemination of culture - A model with local convergence a
     Journal of Conflict Resolution 41(2), pp. 203-226.
 
 """
-# test
+
 # Import libraries
 import random as rd
 
 # Define constants
 SIZE = 5
+#### redefine to enable money and greediness
 TRAITS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 FEATURES = 5
 RUNS = 1000
@@ -68,15 +69,18 @@ class Agent():
     def __init__(self):
         self.culture = [rd.choice(TRAITS) for i in range(FEATURES)]
     
-    def culture_share(self, target, model):
-        similarity = 0
-        for i in model.agents[target].culture:
-            if i == self.culture[model.agents[target].culture.index(i)]:
-                similarity += 1
+#### no need for culture share mechanism in greediness model
+    #def culture_share(self, target, model):
+    #    similarity = 0
+    #    for i in model.agents[target].culture:
+    #        if i == self.culture[model.agents[target].culture.index(i)]:
+    #            similarity += 1
                 
+#### insert effect of greediness
         interaction_probability = similarity / FEATURES
         
         if rd.uniform(0, 1) < interaction_probability:
+#### insert game mechanism
             shared = rd.randint(0, FEATURES - 1)
             model.agents[target].culture[shared] = self.culture[shared]
 
@@ -91,7 +95,8 @@ class Axelrod():
         try:
             active = rd.choice(self.agents)
             passive = find_index(rd.choice(find_neighbors(find_location(self.agents.index(active), SIZE))), SIZE)
-            active.culture_share(passive, self)
+            #active.culture_share(passive, self)
+#### implement some alternative to culture_share
         except IndexError:
             self.tick()
  
