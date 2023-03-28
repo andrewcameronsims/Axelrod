@@ -5,7 +5,7 @@ AXELROD R (1997) The dissemination of culture - A model with local convergence a
     Journal of Conflict Resolution 41(2), pp. 203-226.
 
 """
-
+# test
 # Import libraries
 import random as rd
 
