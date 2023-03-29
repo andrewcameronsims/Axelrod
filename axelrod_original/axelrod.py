@@ -76,13 +76,22 @@ class Agent():
     #    similarity = 0
     #    for i in model.agents[target].culture:
     #        if i == self.culture[model.agents[target].culture.index(i)]:
-    #            similarity += 1
+    #            similarity += 1 
+    def game(self, target, model):
         interaction_probability = self.greediness
-        
+
+        if self.money > model.agents[target].money:
+            win_probability = 0.55
+        else:
+            win_probability = 0.45
+
         if rd.uniform(0, 1) < interaction_probability:
-#### insert game mechanism
-            shared = rd.randint(0, FEATURES - 1)
-            model.agents[target].culture[shared] = self.culture[shared]
+            if rd.uniform(0, 1) < win_probability:    
+                model.agents[target].money = model.agents[target].money - 0.1
+                self.money = self.money + 0.1
+            else: 
+                model.agents[target].money = model.agents[target].money + 0.1
+                self.money = self.money - 0.1
 
 class Axelrod():
     "This is the model"
@@ -93,22 +102,23 @@ class Axelrod():
     def tick(self):
         "Runs a single cycle of the simulation"
         try:
-            active = rd.choice(self.agents)
-            passive = find_index(rd.choice(find_neighbors(find_location(self.agents.index(active), SIZE))), SIZE)
-            #active.culture_share(passive, self)
-#### implement some alternative cycle rule to the one with culture_share
+            active = rd.choice(list(enumerate(self.agents)))
+            passive = rd.choice(list(enumerate(self.agents)))
+            while active[0] == passive[0]:
+                passive = rd.choice(list(enumerate(self.agents)))
+            active[1].game(passive[0], self)
         except IndexError:
             self.tick()
  
     def show_state(self):
         for n in range(0, SIZE):
-            row = [self.agents[i].culture for i in range(n * SIZE, n * (SIZE) + SIZE)]
+            row = [ [self.agents[i].greediness, self.agents[i].money] for i in range(n * SIZE, n * (SIZE) + SIZE)]
             for agent in row:
                 print("[", end="")
                 print(*agent, sep=",", end="")
                 print("]", end="")
             print()
-            print("-" * (SIZE*FEATURES*2+SIZE))
+            print("-" * (SIZE*2*2+SIZE))
     
     def run_sim(self):
         print("Initial state of the model:")
