@@ -14,6 +14,8 @@ import random as rd
 # Define constants
 SIZE = 5
 RUNS = 1000
+PROB_SHIFT = 0.05
+MONEY_GAMBLE = 0.1
 
 # Seed pseudo-random number generator
 rd.seed(1)
@@ -29,17 +31,17 @@ class Agent():
         interaction_probability = self.greediness
 
         if self.money > model.agents[target].money:
-            win_probability = 0.55
+            win_probability = 0.5 + PROB_SHIFT
         else:
-            win_probability = 0.45
+            win_probability = 0.5 - PROB_SHIFT
 
         if rd.uniform(0, 1) < interaction_probability:
             if rd.uniform(0, 1) < win_probability:    
-                model.agents[target].money = model.agents[target].money - 0.1
-                self.money = self.money + 0.1
+                model.agents[target].money = model.agents[target].money - MONEY_GAMBLE
+                self.money = self.money + MONEY_GAMBLE
             else: 
-                model.agents[target].money = model.agents[target].money + 0.1
-                self.money = self.money - 0.1
+                model.agents[target].money = model.agents[target].money + MONEY_GAMBLE
+                self.money = self.money - MONEY_GAMBLE
 
 class Axelrod():
     "This is the model"
