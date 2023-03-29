@@ -13,55 +13,10 @@ import random as rd
 
 # Define constants
 SIZE = 5
-#TRAITS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-#FEATURES = 5
 RUNS = 1000
 
-SEED = 1
-
 # Seed pseudo-random number generator
-rd.seed(SEED)
-
-# Helpful functions for a square grid
-def find_location(index, SIZE):
-    """
-    Finds the x and y coordinates in a square grid of SIZE**2 given an index.
-    It is assumed that we are counting from left to right on a set of rows top-down, and that area is square.
-    Rows and columns start from 0 given Python indexing conventions.
-    
-    e.g.
-        0  1  2
-    0  [0, 1, 2,
-    1   3, 4, 5,
-    2   6, 7, 8]
-    
-    4 = [1, 1]
-    
-    """
-    x_pos = index % SIZE
-    y_pos = index // SIZE
-    return [x_pos, y_pos]
-
-def find_index(loc, SIZE):
-    """
-    Given x and y location in a square grid SIZE**2, returns an index
-    """
-    index = (loc[1] * SIZE - 1) + (loc[0] + 1)
-    return index
-
-def find_neighbors(loc):
-    """
-    Given x and y coordinates, returns compass points neighbors as list
-    """
-    N = loc[0], loc[1] - 1
-    S = loc[0], loc[1] + 1
-    W = loc[0] - 1, loc[1]
-    E = loc[0] + 1, loc[1]
-    NW = loc[0] - 1, loc[1] - 1
-    NE = loc[0] + 1, loc[1] - 1
-    SW = loc[0] - 1, loc[1] + 1
-    SE = loc[0] + 1, loc[1] + 1
-    return [N, S, W, E, NW, NE, SW, SE]
+rd.seed(1)
 
 # Define the model and the agents as classes
 class Agent():
@@ -70,13 +25,6 @@ class Agent():
     def __init__(self):
         self.greediness = rd.uniform(0, 1)
         self.money = rd.uniform(0, 1)
-        #self.culture = [rd.choice(TRAITS) for i in range(FEATURES)]
-
-    #def culture_share(self, target, model):
-    #    similarity = 0
-    #    for i in model.agents[target].culture:
-    #        if i == self.culture[model.agents[target].culture.index(i)]:
-    #            similarity += 1 
     def game(self, target, model):
         interaction_probability = self.greediness
 
